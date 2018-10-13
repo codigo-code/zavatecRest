@@ -9,6 +9,17 @@ public class Product {
 	private String name;
 	private double price;
 	private int count;
+	private String imageB64;
+	
+	
+
+	public String getImageB64() {
+		return imageB64;
+	}
+
+	public void setImageB64(String imageB64) {
+		this.imageB64 = imageB64;
+	}
 
 	public String getSerialCode() {
 		return serialCode;
