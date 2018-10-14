@@ -68,7 +68,7 @@ public class ScannerCode {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM products");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM productos");
 
 			ArrayList<String> output = new ArrayList<String>();
 			while (rs.next()) {
@@ -103,7 +103,7 @@ public class ScannerCode {
 						+ "product_name VARCHAR(100), product_description VARCHAR(100), product_count INT, product_serialcode TEXT)");
 				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode) VALUES" + 
 						" ('" + product.getName() + "','" + product.getDescription() + "'," + product.getCount() + ",'" + product.getSerialCode() + "')";
-				stmt.executeUpdate(query);
+				stmt.executeUpdate(query); 
 				res ="OK";
 			} catch (Exception e) {
 				return res += "message " + e.getMessage()  + product.toString() + " " 
