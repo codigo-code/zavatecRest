@@ -3,21 +3,25 @@ package com.zavatec.controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,7 +65,7 @@ public class ScannerCode {
 	}
 
 	@CrossOrigin
-	@GetMapping(value = "/getProduct")
+	@GetMapping(value = "/getProducts")
 	public List<Product> getProduct() {
 		List<Product> list = new ArrayList<Product>();
 
@@ -83,7 +87,7 @@ public class ScannerCode {
 			}
 
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 
 		return list;
