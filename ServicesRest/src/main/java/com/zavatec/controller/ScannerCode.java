@@ -107,7 +107,7 @@ public class ScannerCode {
 				return res += "message " + e.getMessage()  + product.toString();
 
 			}
-			return product.toString();
+			return " SIN ERRORES: "+ product.toString();
 		} catch (Exception e) {
 			return e.getMessage();
 		}
