@@ -64,26 +64,26 @@ public class ScannerCode {
 	@GetMapping(value = "/getProduct")
 	public List<Product> getProduct() {
 		List<Product> list = new ArrayList<Product>();
-		
+
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT name,description,serialCode,count,image64 FROM productos");
-
+			Product p = new Product();
 			while (rs.next()) {
-				Product p = new Product();
+
 				p.setName(rs.getString("name"));
 				p.setDescription(rs.getString("description"));
 				p.setSerialCode(rs.getString("serialCode"));
 				p.setCount(rs.getInt("count"));
 				p.setImageB64(rs.getString("image64"));
 				list.add(p);
-
+				p = new Product();
 
 			}
 
 		} catch (Exception e) {
-			
+
 		}
 
 		return list;
@@ -93,7 +93,7 @@ public class ScannerCode {
 	@PostMapping(value = "/setProduct")
 	public String setProduct(@RequestBody Product product) {
 		System.out.println(product);
-		String query="";
+		String query = "";
 		try {
 			this.productList.add(product);
 			String res = "";
@@ -101,16 +101,16 @@ public class ScannerCode {
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS productos ("
 						+ "product_name VARCHAR(100), product_description VARCHAR(100), product_count INT, product_serialcode TEXT, image64 TEXT)");
-				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode,image64) VALUES" + 
-						" ('" + product.getName() + "','" + product.getDescription() + "'," + product.getCount() + ",'" + product.getSerialCode() + "','"+ product.getImageB64()+ "' )";
-				stmt.executeUpdate(query); 
-				res ="OK";
+				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode,image64) VALUES"
+						+ " ('" + product.getName() + "','" + product.getDescription() + "'," + product.getCount()
+						+ ",'" + product.getSerialCode() + "','" + product.getImageB64() + "' )";
+				stmt.executeUpdate(query);
+				res = "OK";
 			} catch (Exception e) {
-				return res += "message " + e.getMessage()  + product.toString() + " " 
-						+ query;
+				return res += "message " + e.getMessage() + product.toString() + " " + query;
 
 			}
-			return " SIN ERRORES: "+ product.toString();
+			return " SIN ERRORES: " + product.toString();
 		} catch (Exception e) {
 			return e.getMessage();
 		}
