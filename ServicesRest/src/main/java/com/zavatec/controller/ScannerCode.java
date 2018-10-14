@@ -90,8 +90,8 @@ public class ScannerCode {
 	}
 
 	@CrossOrigin
-	@PostMapping(value = "/setPoduct")
-	public ResponseEntity<Product> setProduct(@RequestBody Product product) {
+	@PostMapping(value = "/setProduct")
+	public String setProduct(@RequestBody Product product) {
 		System.out.println(product);
 		try {
 			this.productList.add(product);
@@ -102,14 +102,14 @@ public class ScannerCode {
 						+ "name text, description text, count int, serialCode text)");
 				stmt.executeUpdate("INSERT INTO products VALUES" + " (" + product.getName() + ","
 						+ product.getDescription() + "," + product.getCount() + "," + product.getSerialCode() + ")");
-				
+				res ="OK";
 			} catch (Exception e) {
 				res += "message " + e.getMessage();
 
 			}
-			return new ResponseEntity<Product>(HttpStatus.OK);
+			return res;
 		} catch (Exception e) {
-			return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return e.getMessage();
 		}
 	}
 
