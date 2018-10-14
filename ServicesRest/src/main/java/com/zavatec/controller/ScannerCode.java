@@ -90,18 +90,19 @@ public class ScannerCode {
 	String db(Map<String, Object> model) {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-			stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-			ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS products ("
+					+ "name text, description text, count int, serialCode text)");
+			stmt.executeUpdate("INSERT INTO products VALUES ('abc123','desc',4,''basrqw'))");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM products");
 
 			ArrayList<String> output = new ArrayList<String>();
 			String res="";
 			while (rs.next()) {
-				res += "  Read from DB: " + rs.getTimestamp("tick");
+				res += "  Read from DB: " + rs.getString("name");
 			}
 
 			
-			return "db";
+			return res;
 		} catch (Exception e) {
 			model.put("message", e.getMessage());
 			return "error";
