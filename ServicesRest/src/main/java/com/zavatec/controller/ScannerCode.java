@@ -68,7 +68,7 @@ public class ScannerCode {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM productos");
+			ResultSet rs = stmt.executeQuery("SELECT name,description,serialCode,count,image64 FROM productos");
 
 			while (rs.next()) {
 				Product p = new Product();
@@ -83,7 +83,7 @@ public class ScannerCode {
 			}
 
 		} catch (Exception e) {
-
+			
 		}
 
 		return list;
