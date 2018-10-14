@@ -104,7 +104,7 @@ public class ScannerCode {
 						+ product.getDescription() + "," + product.getCount() + "," + product.getSerialCode() + ")");
 				res ="OK";
 			} catch (Exception e) {
-				res += "message " + e.getMessage()  + product.toString();
+				return res += "message " + e.getMessage()  + product.toString();
 
 			}
 			return product.toString();
