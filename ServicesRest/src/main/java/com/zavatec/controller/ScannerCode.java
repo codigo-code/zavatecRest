@@ -72,6 +72,24 @@ public class ScannerCode {
 		System.out.println(product);
 		try {
 			this.productList.add(product);
+			String res = "";
+			try (Connection connection = dataSource.getConnection()) {
+				Statement stmt = connection.createStatement();
+				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS products ("
+						+ "name text, description text, count int, serialCode text)");
+				stmt.executeUpdate("INSERT INTO products VALUES" + " (" + product.getName() + ","
+						+ product.getDescription() + "," + product.getCount() + "," + product.getSerialCode() + ")");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM products");
+
+				ArrayList<String> output = new ArrayList<String>();
+
+				while (rs.next()) {
+					res += "  Read from DB: " + rs.getString("name");
+				}
+			} catch (Exception e) {
+				res += "message " + e.getMessage();
+
+			}
 			return new ResponseEntity<Product>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -85,10 +103,9 @@ public class ScannerCode {
 		return this.productList.get(id);
 	}
 
-
 	@RequestMapping("/db")
 	String db(Map<String, Object> model) {
-		String res="";
+		String res = "";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS products ("
@@ -97,12 +114,11 @@ public class ScannerCode {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM products");
 
 			ArrayList<String> output = new ArrayList<String>();
-			
+
 			while (rs.next()) {
 				res += "  Read from DB: " + rs.getString("name");
 			}
 
-			
 			return res;
 		} catch (Exception e) {
 			res += "message " + e.getMessage();
