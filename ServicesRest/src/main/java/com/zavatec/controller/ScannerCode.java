@@ -68,7 +68,7 @@ public class ScannerCode {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT name,description,serialCode,count,image64 FROM productos");
+			ResultSet rs = stmt.executeQuery("SELECT product_name, product_description, product_count, product_serialcode, image64 FROM public.productos");
 			Product p = new Product();
 			while (rs.next()) {
 
@@ -101,7 +101,9 @@ public class ScannerCode {
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS productos ("
 						+ "product_name VARCHAR(100), product_description VARCHAR(100), product_count INT, product_serialcode TEXT, image64 TEXT)");
-				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode,image64) VALUES"
+				query = "INSERT INTO public.productos(" + 
+						"	product_name, product_description, product_count, product_serialcode, image64) " + 
+						"	VALUES "
 						+ " ('" + product.getName() + "','" + product.getDescription() + "'," + product.getCount()
 						+ ",'" + product.getSerialCode() + "','" + product.getImageB64() + "' )";
 				stmt.executeUpdate(query);
