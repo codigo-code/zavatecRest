@@ -98,9 +98,9 @@ public class ScannerCode {
 			String res = "";
 			try (Connection connection = dataSource.getConnection()) {
 				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS product ("
-						+ "name VARCHAR(100), description VARCHAR(100), count INT, serialCode VARCHAR TEXT)");
-				stmt.executeUpdate("INSERT INTO products (name,description,count,serialCode) VALUES" + " (" + product.getName() + ","
+				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS productos ("
+						+ "product_name VARCHAR(100), product_description VARCHAR(100), product_count INT, product_serialcode VARCHAR TEXT)");
+				stmt.executeUpdate("INSERT INTO productos  (product_name, product_description, product_count,serialproduct_serialcode) VALUES" + " (" + product.getName() + ","
 						+ product.getDescription() + "," + product.getCount() + "," + product.getSerialCode() + ")");
 				res ="OK";
 			} catch (Exception e) {
