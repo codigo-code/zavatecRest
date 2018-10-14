@@ -63,7 +63,30 @@ public class ScannerCode {
 	@CrossOrigin
 	@GetMapping(value = "/getProduct")
 	public List<Product> getProduct() {
-		return this.productList;
+		List<Product> list = new ArrayList<Product>();
+		
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT * FROM products");
+
+			ArrayList<String> output = new ArrayList<String>();
+			while (rs.next()) {
+				Product p = new Product();
+				p.setName(rs.getString("name"));
+				p.setDescription(rs.getString("description"));
+				p.setSerialCode(rs.getString("serialCode"));
+				p.setCount(rs.getInt("count"));
+				list.add(p);
+
+
+			}
+
+		} catch (Exception e) {
+
+		}
+
+		return list;
 	}
 
 	@CrossOrigin
