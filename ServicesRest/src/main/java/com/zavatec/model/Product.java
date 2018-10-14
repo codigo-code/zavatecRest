@@ -63,4 +63,10 @@ public class Product {
 		this.count = count;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [serialCode=" + serialCode + ", name=" + name + ", description=" + description + ", price="
+				+ price + ", count=" + count + ", imageB64=" + imageB64 + "]";
+	}
+
 }
