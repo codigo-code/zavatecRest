@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,11 +41,13 @@ public class ScannerCode {
 		this.productList.add(p);
 	}
 
+	@CrossOrigin
 	@GetMapping(value = "/getProduct")
 	public List<Product> getProduct() {
 		return this.productList;
 	}
 
+	@CrossOrigin
 	@PostMapping(value = "/setPoduct")
 	public ResponseEntity<Product> setProduct(@RequestBody Product product) {
 		System.out.println(product);
@@ -56,6 +59,7 @@ public class ScannerCode {
 		}
 	}
 
+	@CrossOrigin
 	@GetMapping(value = "/getProduct/{id}")
 	public Product getProductById(@PathVariable("id") int id) {
 
