@@ -88,6 +88,7 @@ public class ScannerCode {
 
 	@RequestMapping("/db")
 	String db(Map<String, Object> model) {
+		String res="";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate("CREATE TABLE IF NOT EXISTS products ("
@@ -96,7 +97,7 @@ public class ScannerCode {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM products");
 
 			ArrayList<String> output = new ArrayList<String>();
-			String res="";
+			
 			while (rs.next()) {
 				res += "  Read from DB: " + rs.getString("name");
 			}
@@ -104,8 +105,8 @@ public class ScannerCode {
 			
 			return res;
 		} catch (Exception e) {
-			model.put("message", e.getMessage());
-			return "error";
+			res += "message " + e.getMessage();
+			return res;
 		}
 	}
 
