@@ -101,7 +101,7 @@ public class ScannerCode {
 				Statement stmt = connection.createStatement();
 				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS productos ("
 						+ "product_name VARCHAR(100), product_description VARCHAR(100), product_count INT, product_serialcode TEXT, image64 TEXT)");
-				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode) VALUES" + 
+				query = "INSERT INTO productos  (product_name, product_description, product_count, product_serialcode,image64) VALUES" + 
 						" ('" + product.getName() + "','" + product.getDescription() + "'," + product.getCount() + ",'" + product.getSerialCode() + "','"+ product.getImageB64()+ "' )";
 				stmt.executeUpdate(query); 
 				res ="OK";
