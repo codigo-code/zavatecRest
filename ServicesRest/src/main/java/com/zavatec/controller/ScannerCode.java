@@ -102,13 +102,7 @@ public class ScannerCode {
 						+ "name text, description text, count int, serialCode text)");
 				stmt.executeUpdate("INSERT INTO products VALUES" + " (" + product.getName() + ","
 						+ product.getDescription() + "," + product.getCount() + "," + product.getSerialCode() + ")");
-				ResultSet rs = stmt.executeQuery("SELECT * FROM products");
-
-				ArrayList<String> output = new ArrayList<String>();
-
-				while (rs.next()) {
-					res += "  Read from DB: " + rs.getString("name");
-				}
+				
 			} catch (Exception e) {
 				res += "message " + e.getMessage();
 
