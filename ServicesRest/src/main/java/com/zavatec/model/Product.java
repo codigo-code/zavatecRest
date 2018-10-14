@@ -7,9 +7,19 @@ public class Product {
 
 	private String serialCode;
 	private String name;
+	private String description;
 	private double price;
 	private int count;
 	private String imageB64;
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	
 	
 

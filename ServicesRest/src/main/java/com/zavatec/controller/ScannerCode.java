@@ -31,6 +31,7 @@ public class ScannerCode {
 		p.setPrice(100.0);
 		p.setName("MotherBoard");
 		p.setSerialCode("ABC123");
+		p.setDescription("Computador IBM para recambio");
 		String sCurrentLine;
 
 		while ((sCurrentLine = br.readLine()) != null) {
