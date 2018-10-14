@@ -95,11 +95,12 @@ public class ScannerCode {
 			ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
 
 			ArrayList<String> output = new ArrayList<String>();
+			String res="";
 			while (rs.next()) {
-				output.add("Read from DB: " + rs.getTimestamp("tick"));
+				res += "  Read from DB: " + rs.getTimestamp("tick");
 			}
 
-			model.put("records", output);
+			
 			return "db";
 		} catch (Exception e) {
 			model.put("message", e.getMessage());
